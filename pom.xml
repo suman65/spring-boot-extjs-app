@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.suman</groupId>
+	<artifactId>spring-boot-extjs-app</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>spring-boot-extjs-app</name>
+	<description>spring-boot-extjs-app</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.3.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<properties>
+		<start-class>com.suman.spring.extjs.Application</start-class>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ssZ</maven.build.timestamp.format>
+		<build.timestamp>${maven.build.timestamp}</build.timestamp>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>spring-boot-extjs-app</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>				
+			</plugin>
+			
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>application-development.yml</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<id>sencha-app-clean-development</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<executable>sencha</executable>
+							<workingDirectory>${basedir}/client</workingDirectory>
+							<arguments>
+								<argument>app</argument>
+								<argument>clean</argument>
+								<argument>development</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>sencha-app-clean</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<executable>sencha</executable>
+							<workingDirectory>${basedir}/client</workingDirectory>
+							<arguments>
+								<argument>app</argument>
+								<argument>clean</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>sencha-app-build</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<executable>sencha</executable>
+							<workingDirectory>${basedir}/client</workingDirectory>
+							<arguments>
+								<argument>app</argument>
+								<argument>build</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+
+								<copy todir="${basedir}/target/classes/static">
+									<fileset dir="${basedir}/client">
+									</fileset>
+								</copy>
+								<copy todir="${basedir}/target/classes/static"
+									includeEmptyDirs="false">
+									<fileset dir="${basedir}/client/build/temp/production/AbhayaApp">
+										<exclude name="**/Readme.md" />
+										<exclude name="resources/ext/" />
+										<exclude name="resources/fonts/OpenSans*" />
+									</fileset>
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

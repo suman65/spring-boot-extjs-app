@@ -1,0 +1,102 @@
+@mixin btn-border($background-color){
+  background-color: $background-color;
+  border-color: $background-color !important;
+  .x-btn-inner-default-toolbar-small{
+    color: $lightest-color;
+  }
+  &:hover{
+    .x-btn-inner-default-toolbar-small,.x-btn-inner-default-small{
+      color: $background-color;
+    }
+    .x-btn-icon-el-default-small,.x-btn-icon-el-default-toolbar-small{
+      color: $background-color;
+    }
+    background-color: transparent;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($h-shadow,$v-shadow,$blur,$spread,$shadow-color) {
+  $value: $h-shadow, $v-shadow, $blur, $spread, $shadow-color;
+  -webkit-box-shadow: $value;
+  -moz-box-shadow: $value;
+  -ms-box-shadow: $value;
+  box-shadow: $value;
+}
+
+*:focus {
+  outline:0 !important;
+}
+
+.x-menu-header {
+  z-index: 0 !important;
+}
+
+.x-css-shadow{
+  box-shadow:none !important;
+}
+
+.x-fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 $font-family;
+}
+
+.alignRight {
+  float: right;
+}
+
+.boldFont {
+  font-weight: bold;
+}
+.x-column-header {
+    color: #404040;
+    font: bold 13px/19px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;
+    background-color: #ccc !important;
+}
+.x-tab-bar-default {
+    background-color: #32404E !important;
+}
+.x-tabpanel-custom .x-box-inner {
+    top: 0px !important;
+}
+
+x-tabpanel-custom .x-tab-inner-default {
+    font: bold 13px/20px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;
+}
+.x-emp-personl-form .x-panel-header-title-default 
+{
+    color: black !important;
+    font-weight: bold !important;
+}
+
+.x-emp-personl-form .x-panel-header-default-horizontal.x-header-noborder {
+    padding: 12px 16px 12px 16px;
+    border-bottom: 1px solid #ccc !important;
+}
+.x-btn-inner-default-small {
+    font: bold 13px/17px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;
+}
+.x-btn-inner-default-toolbar-small 
+{
+    font: 600 12px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;
+    color: #fff !important;
+}
+.x-btn-default-toolbar-small 
+{
+    border-color: #607D8B !important;
+    background-color: #607D8B !important;
+}
+.x-btn-icon-el-default-toolbar-small 
+{
+    color: #35BAF6 !important;
+}
+.x-progress-default .x-progress-bar-default {
+    background-image: none !important;
+    background-color: #35BAF6 !important;
+}
